@@ -158,20 +158,16 @@ const Gallery: React.FC = () => {
               </motion.button>
             )}
 
-            {/* Image Container */}
-            <motion.div
-              className="relative max-w-full max-h-full flex items-center justify-center p-4 md:p-12"
+            {/* Image */}
+            <motion.img
+              src={sketches[selectedIndex].public_url}
+              alt={sketches[selectedIndex].title || 'Sketch'}
+              className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={sketches[selectedIndex].public_url}
-                alt={sketches[selectedIndex].title || 'Sketch'}
-                className="max-w-[100vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl"
-              />
-            </motion.div>
+            />
 
             {/* Image Info */}
             <motion.div
