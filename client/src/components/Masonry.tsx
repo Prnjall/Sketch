@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import './Masonry.css';
 
 export interface MasonryItem {
@@ -78,7 +79,8 @@ const Masonry: React.FC<MasonryProps> = ({
               }
             }}
           >
-            <img
+            <motion.img
+              layoutId={`sketch-${item.id}`}
               className="masonry-item-img"
               src={item.img}
               alt={item.title || 'Sketch'}
