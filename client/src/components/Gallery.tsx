@@ -53,7 +53,7 @@ const Gallery: React.FC = () => {
     <section
       id="gallery"
       className="relative w-full py-20 md:py-32"
-      style={{ background: 'rgba(0,0,0,0.55)', contain: 'paint' }}
+      style={{ background: 'rgba(0,0,0,0.55)' }}
     >
       <div className="container mx-auto px-6 md:px-12 lg:px-16">
         {/* Header */}
@@ -160,12 +160,10 @@ const Gallery: React.FC = () => {
 
             {/* Image */}
             <motion.img
+              layoutId={`sketch-${sketches[selectedIndex].id}`}
               src={sketches[selectedIndex].public_url}
               alt={sketches[selectedIndex].title || 'Sketch'}
               className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
             />
 
