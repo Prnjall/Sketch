@@ -1,0 +1,292 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Dark moody sketch portfolio design system */
+  --primary: oklch(0.93 0.009 65);
+  --primary-foreground: oklch(0.05 0.01 65);
+  --sidebar-primary: oklch(0.93 0.009 65);
+  --sidebar-primary-foreground: oklch(0.05 0.01 65);
+  --chart-1: oklch(0.93 0.009 65);
+  --chart-2: oklch(0.85 0.008 65);
+  --chart-3: oklch(0.75 0.007 65);
+  --chart-4: oklch(0.65 0.006 65);
+  --chart-5: oklch(0.55 0.005 65);
+  --radius: 1rem;
+  --background: oklch(0.04 0.01 65);
+  --foreground: oklch(0.93 0.009 65);
+  --card: oklch(0.08 0.01 65);
+  --card-foreground: oklch(0.93 0.009 65);
+  --popover: oklch(0.08 0.01 65);
+  --popover-foreground: oklch(0.93 0.009 65);
+  --secondary: oklch(0.12 0.01 65);
+  --secondary-foreground: oklch(0.85 0.008 65);
+  --muted: oklch(0.15 0.01 65);
+  --muted-foreground: oklch(0.65 0.006 65);
+  --accent: oklch(0.93 0.009 65);
+  --accent-foreground: oklch(0.05 0.01 65);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.15 0.01 65);
+  --input: oklch(0.12 0.01 65);
+  --ring: oklch(0.93 0.009 65);
+  --sidebar: oklch(0.08 0.01 65);
+  --sidebar-foreground: oklch(0.93 0.009 65);
+  --sidebar-accent: oklch(0.15 0.01 65);
+  --sidebar-accent-foreground: oklch(0.93 0.009 65);
+  --sidebar-border: oklch(0.15 0.01 65);
+  --sidebar-ring: oklch(0.93 0.009 65);
+}
+
+.dark {
+  /* Dark moody aesthetic - already set in :root */
+  --primary: oklch(0.93 0.009 65);
+  --primary-foreground: oklch(0.05 0.01 65);
+  --sidebar-primary: oklch(0.93 0.009 65);
+  --sidebar-primary-foreground: oklch(0.05 0.01 65);
+  --background: oklch(0.04 0.01 65);
+  --foreground: oklch(0.93 0.009 65);
+  --card: oklch(0.08 0.01 65);
+  --card-foreground: oklch(0.93 0.009 65);
+  --popover: oklch(0.08 0.01 65);
+  --popover-foreground: oklch(0.93 0.009 65);
+  --secondary: oklch(0.12 0.01 65);
+  --secondary-foreground: oklch(0.85 0.008 65);
+  --muted: oklch(0.15 0.01 65);
+  --muted-foreground: oklch(0.65 0.006 65);
+  --accent: oklch(0.93 0.009 65);
+  --accent-foreground: oklch(0.05 0.01 65);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.15 0.01 65);
+  --input: oklch(0.12 0.01 65);
+  --ring: oklch(0.93 0.009 65);
+  --chart-1: oklch(0.93 0.009 65);
+  --chart-2: oklch(0.85 0.008 65);
+  --chart-3: oklch(0.75 0.007 65);
+  --chart-4: oklch(0.65 0.006 65);
+  --chart-5: oklch(0.55 0.005 65);
+  --sidebar: oklch(0.08 0.01 65);
+  --sidebar-foreground: oklch(0.93 0.009 65);
+  --sidebar-accent: oklch(0.15 0.01 65);
+  --sidebar-accent-foreground: oklch(0.93 0.009 65);
+  --sidebar-border: oklch(0.15 0.01 65);
+  --sidebar-ring: oklch(0.93 0.009 65);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    background-color: #0a0908; /* slightly warm black, not pure */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%230a0a0a'/%3E%3Ccircle cx='0.5' cy='0.5' r='0.4' fill='white' opacity='0.03'/%3E%3Ccircle cx='2.5' cy='1.5' r='0.3' fill='white' opacity='0.025'/%3E%3Ccircle cx='1.2' cy='3.2' r='0.35' fill='white' opacity='0.02'/%3E%3Ccircle cx='3.5' cy='2.8' r='0.3' fill='white' opacity='0.03'/%3E%3Ccircle cx='0.8' cy='2.1' r='0.25' fill='white' opacity='0.015'/%3E%3Ccircle cx='3.1' cy='0.7' r='0.4' fill='white' opacity='0.025'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    @apply text-foreground;
+    overflow-x: hidden;                    /* prevent horizontal scroll on mobile */
+    -webkit-overflow-scrolling: touch;     /* smooth momentum scroll on iOS       */
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.012) 3px,
+      rgba(255, 255, 255, 0.012) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 5px,
+      rgba(255, 255, 255, 0.008) 5px,
+      rgba(255, 255, 255, 0.008) 6px
+    );
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 50%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+  }
+  /* Promote the WebGL canvas to its own GPU compositing layer so the
+     fixed Silk background doesn't repaint during scroll on mobile.    */
+  canvas {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  /**
+   * Custom container utility that centers content and adds responsive padding.
+   *
+   * This overrides Tailwind's default container behavior to:
+   * - Auto-center content (mx-auto)
+   * - Add responsive horizontal padding
+   * - Set max-width for large screens
+   *
+   * Usage: <div className="container">...</div>
+   *
+   * For custom widths, use max-w-* utilities directly:
+   * <div className="max-w-6xl mx-auto px-4">...</div>
+   */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px - mobile padding */
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem; /* 32px - desktop padding */
+      padding-right: 2rem;
+      max-width: 1280px; /* Standard content width */
+    }
+  }
+}
+
+/* Space Grotesk font import */
+
+@layer base {
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+/* Portfolio-specific styles */
+@layer components {
+  /* Grain texture overlay */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.5"/></svg>');
+    z-index: 1;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hero text styles */
+  .hero-title {
+    @apply text-8xl md:text-9xl font-bold tracking-tighter leading-none;
+  }
+
+  .hero-subtitle {
+    @apply text-lg md:text-xl font-light tracking-widest uppercase;
+  }
+
+  /* Gallery card hover effect */
+  .gallery-card {
+    @apply relative overflow-hidden rounded-lg transition-all duration-300;
+  }
+
+  .gallery-card:hover {
+    @apply scale-[1.03];
+  }
+
+  /* Lightbox styles */
+  .lightbox-overlay {
+    @apply fixed inset-0 bg-black/92 backdrop-blur-sm z-50 flex items-center justify-center;
+  }
+
+  /* Smooth fade animations */
+  .fade-in {
+    @apply animate-in fade-in duration-700;
+  }
+
+  .fade-in-up {
+    @apply animate-in fade-in slide-in-from-bottom-4 duration-700;
+  }
+
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+}
