@@ -119,78 +119,76 @@ const Gallery: React.FC = () => {
       <AnimatePresence>
         {selectedIndex !== null && (
           <motion.div
-            className="lightbox-overlay"
+            className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedIndex(null)}
           >
+            {/* Close Button */}
+            <motion.button
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-[10000] text-white/70 hover:text-white transition-colors p-2 bg-black/20 rounded-full"
+              onClick={() => setSelectedIndex(null)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <X size={28} />
+            </motion.button>
+
+            {/* Navigation Arrows */}
+            {selectedIndex > 0 && (
+              <motion.button
+                className="absolute left-2 md:left-6 top-1/2 transform -translate-y-1/2 z-[10000] text-white/70 hover:text-white transition-colors p-2 bg-black/20 rounded-full"
+                onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <ChevronLeft size={36} />
+              </motion.button>
+            )}
+
+            {selectedIndex < sketches.length - 1 && (
+              <motion.button
+                className="absolute right-2 md:right-6 top-1/2 transform -translate-y-1/2 z-[10000] text-white/70 hover:text-white transition-colors p-2 bg-black/20 rounded-full"
+                onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <ChevronRight size={36} />
+              </motion.button>
+            )}
+
+            {/* Image Container */}
             <motion.div
-              className="relative w-full h-full flex items-center justify-center"
+              className="relative max-w-full max-h-full flex items-center justify-center p-4 md:p-12"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
-              <motion.button
-                className="absolute top-6 right-6 z-50 text-white hover:text-white/70 transition-colors"
-                onClick={() => setSelectedIndex(null)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <X size={32} />
-              </motion.button>
+              <img
+                src={sketches[selectedIndex].public_url}
+                alt={sketches[selectedIndex].title || 'Sketch'}
+                className="max-w-[100vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl"
+              />
+            </motion.div>
 
-              {/* Image */}
-              <div className="relative w-full h-full flex items-center justify-center px-4">
-                <img
-                  src={sketches[selectedIndex].public_url}
-                  alt={sketches[selectedIndex].title || 'Sketch'}
-                  className="max-w-[90vw] max-h-[90vh] object-contain"
-                />
-              </div>
-
-              {/* Navigation Arrows */}
-              {selectedIndex > 0 && (
-                <motion.button
-                  className="absolute left-6 top-1/2 transform -translate-y-1/2 text-white hover:text-white/70 transition-colors"
-                  onClick={handlePrevious}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <ChevronLeft size={40} />
-                </motion.button>
+            {/* Image Info */}
+            <motion.div
+              className="absolute bottom-6 md:bottom-8 left-0 right-0 text-center text-white pointer-events-none"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              {sketches[selectedIndex].title && (
+                <p className="font-semibold text-base md:text-lg">{sketches[selectedIndex].title}</p>
               )}
-
-              {selectedIndex < sketches.length - 1 && (
-                <motion.button
-                  className="absolute right-6 top-1/2 transform -translate-y-1/2 text-white hover:text-white/70 transition-colors"
-                  onClick={handleNext}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <ChevronRight size={40} />
-                </motion.button>
-              )}
-
-              {/* Image Info */}
-              <motion.div
-                className="absolute bottom-6 left-6 right-6 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {sketches[selectedIndex].title && (
-                  <p className="font-semibold text-lg">{sketches[selectedIndex].title}</p>
-                )}
-                <p className="text-white/60 text-sm mt-1">
-                  {new Date(sketches[selectedIndex].created_at).toLocaleDateString()}
-                </p>
-                <p className="text-white/40 text-xs mt-2">
-                  {selectedIndex + 1} / {sketches.length}
-                </p>
-              </motion.div>
+              <p className="text-white/60 text-xs md:text-sm mt-1">
+                {new Date(sketches[selectedIndex].created_at).toLocaleDateString()}
+              </p>
+              <p className="text-white/40 text-xs mt-1 md:mt-2">
+                {selectedIndex + 1} / {sketches.length}
+              </p>
             </motion.div>
           </motion.div>
         )}
