@@ -2,7 +2,7 @@
 
 A sleek, modern, and highly performant sketch portfolio web application. Designed to showcase hand-drawn artwork with a beautiful "sketchbook" aesthetic featuring a CSS masonry layout and smooth Framer Motion animations.
 
-![Portfolio Preview](./client/public/vite.svg) *(Replace with an actual screenshot of the portfolio)*
+
 
 ## 🚀 Tech Stack
 
