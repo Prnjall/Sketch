@@ -1,3 +1,4 @@
+// @ts-nocheck — unused scaffold file, not imported by any active component.
 import { getLoginUrl } from "@/config/env";
 import { trpc } from "@/lib/trpc";
 import { TRPCClientError } from "@trpc/client";

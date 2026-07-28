@@ -11,13 +11,14 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onScrollGallery }) => {
-  const { sketches } = useSketches(5);
+  const { sketches } = useSketches();
+  const latest = sketches.slice(0, 5);
 
-  const stackCards = sketches.slice(0, 5).map((sketch) => (
+  const stackCards = latest.map((sketch, i) => (
     <img
-      key={sketch.id}
-      src={sketch.public_url}
-      alt={sketch.title || 'Sketch'}
+      key={i}
+      src={sketch.url}
+      alt={sketch.title || 'sketch'}
       style={{
         width: '100%',
         height: '100%',

@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useSketches } from '@/hooks/useSketches';
 import Masonry, { MasonryItem } from './Masonry';
+import { useSketches } from '@/hooks/useSketches';
 
 // Deterministic height based on sketch id so layout is stable across renders
 const getHeight = (id: string): number => {
@@ -15,7 +15,7 @@ const getHeight = (id: string): number => {
 };
 
 const Gallery: React.FC = () => {
-  const { sketches, loading, hasMore, loadMore } = useSketches(20);
+  const { sketches } = useSketches();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handlePrevious = () => {
@@ -41,12 +41,12 @@ const Gallery: React.FC = () => {
     }
   }, [selectedIndex, sketches.length]);
 
-  const masonryItems: MasonryItem[] = sketches.map((sketch, index) => ({
-    id: sketch.id,
-    img: sketch.public_url,
-    height: getHeight(sketch.id),
+  const masonryItems: MasonryItem[] = sketches.map((sketch) => ({
+    id: sketch.id.toString(),
+    img: sketch.url,
+    height: getHeight(sketch.id.toString()),
     title: sketch.title,
-    date: sketch.created_at,
+    date: sketch.date,
   }));
 
   return (
@@ -77,42 +77,15 @@ const Gallery: React.FC = () => {
         {sketches.length > 0 ? (
           <Masonry
             items={masonryItems}
-            ease="power3.out"
-            duration={0.6}
-            stagger={0.05}
-            animateFrom="bottom"
             scaleOnHover
             hoverScale={0.95}
             blurToFocus
-            colorShiftOnHover={false}
             onItemClick={(item, index) => setSelectedIndex(index)}
           />
-        ) : loading ? (
-          <p className="text-white/40 text-sm">Loading sketches...</p>
         ) : (
           <p className="text-white/40 text-sm">No sketches yet.</p>
         )}
 
-        {/* Load More Button */}
-        {hasMore && (
-          <motion.div
-            className="mt-16 flex justify-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <motion.button
-              onClick={loadMore}
-              disabled={loading}
-              className="px-8 py-3 border border-white/30 text-white hover:border-white/70 hover:text-white transition-colors disabled:opacity-50"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {loading ? 'Loading...' : 'Load More'}
-            </motion.button>
-          </motion.div>
-        )}
       </div>
 
       {/* Lightbox Modal */}
@@ -161,7 +134,7 @@ const Gallery: React.FC = () => {
             {/* Image */}
             <motion.img
               layoutId={`sketch-${sketches[selectedIndex].id}`}
-              src={sketches[selectedIndex].public_url}
+              src={sketches[selectedIndex].url}
               alt={sketches[selectedIndex].title || 'Sketch'}
               className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm"
               onClick={(e) => e.stopPropagation()}
@@ -178,7 +151,7 @@ const Gallery: React.FC = () => {
                 <p className="font-semibold text-base md:text-lg">{sketches[selectedIndex].title}</p>
               )}
               <p className="text-white/60 text-xs md:text-sm mt-1">
-                {new Date(sketches[selectedIndex].created_at).toLocaleDateString()}
+                {sketches[selectedIndex].date}
               </p>
               <p className="text-white/40 text-xs mt-1 md:mt-2">
                 {selectedIndex + 1} / {sketches.length}
