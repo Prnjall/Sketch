@@ -15,17 +15,34 @@ const Hero: React.FC<HeroProps> = ({ onScrollGallery }) => {
   const latest = sketches.slice(0, 5);
 
   const stackCards = latest.map((sketch, i) => (
-    <img
+    <div
       key={i}
-      src={sketch.url}
-      alt={sketch.title || 'sketch'}
       style={{
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: '#111111',
         width: '100%',
         height: '100%',
-        objectFit: 'cover',
         borderRadius: '1rem',
       }}
-    />
+    >
+      <img
+        src={sketch.url}
+        alt={sketch.title || 'sketch'}
+        loading="lazy"
+        decoding="async"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transition: 'opacity 0.4s ease',
+          opacity: 0,
+        }}
+        onLoad={(e) => {
+          (e.target as HTMLImageElement).style.opacity = '1';
+        }}
+      />
+    </div>
   ));
 
   return (

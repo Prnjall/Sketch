@@ -132,13 +132,21 @@ const Gallery: React.FC = () => {
             )}
 
             {/* Image */}
-            <motion.img
-              layoutId={`sketch-${sketches[selectedIndex].id}`}
-              src={sketches[selectedIndex].url}
-              alt={sketches[selectedIndex].title || 'Sketch'}
-              className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111111', display: 'flex' }}>
+              <motion.img
+                layoutId={`sketch-${sketches[selectedIndex].id}`}
+                src={sketches[selectedIndex].url}
+                alt={sketches[selectedIndex].title || 'Sketch'}
+                className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm"
+                onClick={(e) => e.stopPropagation()}
+                loading="lazy"
+                decoding="async"
+                style={{ transition: 'opacity 0.4s ease', opacity: 0 }}
+                onLoad={(e) => {
+                  (e.target as HTMLImageElement).style.opacity = '1';
+                }}
+              />
+            </div>
 
             {/* Image Info */}
             <motion.div
