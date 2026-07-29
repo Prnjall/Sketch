@@ -41,6 +41,11 @@ const Hero: React.FC<HeroProps> = ({ onScrollGallery }) => {
         onLoad={(e) => {
           (e.target as HTMLImageElement).style.opacity = '1';
         }}
+        ref={(img: HTMLImageElement | null) => {
+          if (img?.complete) {
+            img.style.opacity = '1';
+          }
+        }}
       />
     </div>
   ));

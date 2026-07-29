@@ -79,7 +79,7 @@ const Masonry: React.FC<MasonryProps> = ({
               }
             }}
           >
-            <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111111' }}>
+            <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111111', borderRadius: '10px' }}>
               <motion.img
                 layoutId={`sketch-${item.id}`}
                 className="masonry-item-img"
@@ -90,6 +90,11 @@ const Masonry: React.FC<MasonryProps> = ({
                 style={{ width: '100%', height: 'auto', display: 'block', transition: 'opacity 0.4s ease', opacity: 0 }}
                 onLoad={(e) => {
                   (e.target as HTMLImageElement).style.opacity = '1';
+                }}
+                ref={(img: HTMLImageElement | null) => {
+                  if (img?.complete) {
+                    img.style.opacity = '1';
+                  }
                 }}
               />
             </div>
