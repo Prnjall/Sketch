@@ -137,17 +137,16 @@ const Gallery: React.FC = () => {
                 layoutId={`sketch-${sketches[selectedIndex].id}`}
                 src={sketches[selectedIndex].url}
                 alt={sketches[selectedIndex].title || 'Sketch'}
-                className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm"
+                className="max-w-[95vw] max-h-[75vh] md:max-w-[85vw] md:max-h-[85vh] object-contain shadow-2xl z-[10001] rounded-sm sketch-fade"
                 onClick={(e) => e.stopPropagation()}
                 loading="lazy"
                 decoding="async"
-                style={{ transition: 'opacity 0.4s ease', opacity: 0 }}
                 onLoad={(e) => {
-                  (e.target as HTMLImageElement).style.opacity = '1';
+                  (e.target as HTMLImageElement).classList.add('loaded');
                 }}
                 ref={(img: HTMLImageElement | null) => {
                   if (img?.complete) {
-                    img.style.opacity = '1';
+                    img.classList.add('loaded');
                   }
                 }}
               />

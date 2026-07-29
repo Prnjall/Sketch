@@ -41,3 +41,12 @@
   box-shadow: 0px 10px 50px -10px rgba(0, 0, 0, 0.3);
   display: block;
 }
+
+/* Fallback for framer-motion overriding inline opacity styles */
+.sketch-fade {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.sketch-fade.loaded {
+  opacity: 1 !important;
+}

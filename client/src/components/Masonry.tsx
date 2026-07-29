@@ -82,18 +82,18 @@ const Masonry: React.FC<MasonryProps> = ({
             <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#111111', borderRadius: '10px' }}>
               <motion.img
                 layoutId={`sketch-${item.id}`}
-                className="masonry-item-img"
+                className="masonry-item-img sketch-fade"
                 src={item.img}
                 alt={item.title || 'Sketch'}
                 loading="lazy"
                 decoding="async"
-                style={{ width: '100%', height: 'auto', display: 'block', transition: 'opacity 0.4s ease', opacity: 0 }}
+                style={{ width: '100%', height: 'auto', display: 'block' }}
                 onLoad={(e) => {
-                  (e.target as HTMLImageElement).style.opacity = '1';
+                  (e.target as HTMLImageElement).classList.add('loaded');
                 }}
                 ref={(img: HTMLImageElement | null) => {
                   if (img?.complete) {
-                    img.style.opacity = '1';
+                    img.classList.add('loaded');
                   }
                 }}
               />
