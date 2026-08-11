@@ -175,27 +175,32 @@ function Band({
   // Composite the front/back images into the card's texture atlas (front = left
   // half, back = right half). Each image is drawn aspect-preserving (no stretch).
   const cardMap = useMemo(() => {
-    const baseMap = materials.base.map as THREE.Texture;
-    if (!frontImage && !backImage) return baseMap;
+    const baseMap = materials.base?.map as THREE.Texture | undefined;
+    if (!frontImage && !backImage) return baseMap || null;
 
-    const baseImg = baseMap.image as any;
-    if (!baseImg) return baseMap;
-    const W = baseImg.width || 1024;
-    const H = baseImg.height || 1024;
-    if (W === 0 || H === 0) return baseMap;
+    const baseImg = baseMap?.image as any;
+    const W = baseImg?.width || 1024;
+    const H = baseImg?.height || 1024;
+    if (W === 0 || H === 0) return baseMap || null;
     
     const canvas = document.createElement('canvas');
     canvas.width = W;
     canvas.height = H;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return baseMap;
+    if (!ctx) return baseMap || null;
     
     // Keep the original baked atlas for the card edges and any untouched face.
     try {
-      ctx.drawImage(baseImg, 0, 0, W, H);
+      if (baseImg) {
+        ctx.drawImage(baseImg, 0, 0, W, H);
+      } else {
+        // Fallback if baseImg is null
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, W, H);
+      }
     } catch (e) {
       console.error("Failed to draw base image to canvas:", e);
-      return baseMap;
+      return baseMap || null;
     }
 
     const drawFitted = (img: any, rect: typeof FRONT_UV_RECT) => {
@@ -244,11 +249,11 @@ function Band({
 
     const composite = new THREE.CanvasTexture(canvas);
     composite.colorSpace = THREE.SRGBColorSpace;
-    composite.flipY = baseMap.flipY;
+    composite.flipY = baseMap ? baseMap.flipY : false;
     composite.anisotropy = 16;
     composite.needsUpdate = true;
     return composite;
-  }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base.map]);
+  }, [frontImage, backImage, imageFit, frontTex, backTex, materials.base?.map]);
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
