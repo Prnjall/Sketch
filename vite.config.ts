@@ -154,6 +154,7 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   plugins,
+  assetsInclude: ['**/*.glb'],
   resolve: {
     alias: {
       "@/data": path.resolve(import.meta.dirname, "data"),

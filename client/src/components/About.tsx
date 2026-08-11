@@ -1,17 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Instagram } from 'lucide-react';
+
+const Lanyard = React.lazy(() => import('./Lanyard'));
 
 const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="relative w-full py-20 md:py-32"
-      style={{ background: 'rgba(0,0,0,0.60)', contain: 'paint' }}
+      className="relative w-full py-20 md:py-32 min-h-[700px] lg:min-h-[600px] overflow-visible"
+      style={{ background: 'rgba(0,0,0,0.60)' }}
     >
-      <div className="container mx-auto px-6 md:px-12 lg:px-16">
+      {/* Lanyard Overlay - Absolute positioned to cover the entire section */}
+      <div 
+        className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none"
+        style={{ touchAction: 'none' }}
+      >
+        <Suspense fallback={null}>
+          <Lanyard
+            position={[0, 0, 20]}
+            gravity={[0, -40, 0]}
+            frontImage="/pranjal-card.png"
+            imageFit="cover"
+            transparent={true}
+            lanyardWidth={0.5}
+          />
+        </Suspense>
+      </div>
+
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 relative z-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
