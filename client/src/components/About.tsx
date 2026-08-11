@@ -16,7 +16,6 @@ const About: React.FC = () => {
       {/* Lanyard Overlay - Absolute positioned to cover the entire section */}
       <div 
         className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none"
-        style={{ touchAction: 'none' }}
       >
         <Suspense fallback={null}>
           <Lanyard

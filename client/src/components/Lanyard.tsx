@@ -80,7 +80,7 @@ export default function Lanyard({
   return (
     <div className="relative z-0 w-full h-full flex justify-center items-center">
       <Canvas
-        style={{ pointerEvents: 'auto' }}
+        style={{ pointerEvents: 'auto', touchAction: 'pan-y' }}
         camera={{ position: cameraPos, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
